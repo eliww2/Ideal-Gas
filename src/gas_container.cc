@@ -1,23 +1,34 @@
 #include "gas_container.h"
+#include "particle.h"
 
 namespace idealgas {
 
 using glm::vec2;
 
-GasContainer::GasContainer() {
-
+GasContainer::GasContainer(size_t num_particles) {
+  for (size_t i = 0; i < num_particles; i++) {
+    size_t xPos = rand() % 480 + 110;
+    size_t yPos = rand() % 480 + 110;
+    vec2 position = vec2(xPos, yPos);
+    size_t xVelocity = rand() % 100;
+    size_t yVelocity = rand() % 100;
+    vec2 velocity = vec2(xVelocity, yVelocity);
+    Particle particle(position, velocity);
+    particles_.push_back(particle);
+  }
 }
 
 void GasContainer::Display() const {
-  // This function has a lot of magic numbers; be sure to design your code in a way that avoids this.
   ci::gl::color(ci::Color("orange"));
-  ci::gl::drawSolidCircle(vec2(dummy_variable_, 200), 10);
+  for (size_t i = 0; i < particles_.size(); i++) {
+    ci::gl::drawSolidCircle(particles_[i].GetPosition(), kDefaultRadius);
+  }
   ci::gl::color(ci::Color("white"));
-  ci::gl::drawStrokedRect(ci::Rectf(vec2(100, 100), vec2(600, 400)));
+  ci::gl::drawStrokedRect(ci::Rectf(kTopLeftBox, kBottomRightBox));
 }
 
 void GasContainer::AdvanceOneFrame() {
-  ++dummy_variable_;
+
 }
 
 }  // namespace idealgas

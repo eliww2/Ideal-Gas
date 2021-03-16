@@ -1,6 +1,8 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
+#include <vector>
+#include "particle.h"
 
 using glm::vec2;
 
@@ -12,10 +14,8 @@ namespace idealgas {
  */
 class GasContainer {
  public:
-  /**
-   * TODO: Add more parameters to this constructor, and add documentation.
-   */
-  GasContainer();
+
+  GasContainer(size_t num_particles);
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -29,11 +29,14 @@ class GasContainer {
   void AdvanceOneFrame();
 
  private:
-  /**
-   * This variable is just for the purposes of demonstrating how to make a shape move
-   * across a screen. Please remove it once you start working on your code.
-   */
-  int dummy_variable_ = 0;
+
+  int kDefaultRadius = 10;
+
+  std::vector<Particle> particles_;
+
+  vec2 kTopLeftBox = vec2(100, 100);
+  vec2 kBottomRightBox = vec2(600, 600);
+
 };
 
 }  // namespace idealgas
