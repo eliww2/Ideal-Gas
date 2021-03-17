@@ -28,14 +28,22 @@ class GasContainer {
    */
   void AdvanceOneFrame();
 
+  glm::vec2 ParticleCollision(glm::vec2 pos_one, glm::vec2 pos_two, glm::vec2 vel_one,
+                         glm::vec2 vel_two);
  private:
-
-  int kDefaultRadius = 10;
 
   std::vector<Particle> particles_;
 
-  vec2 kTopLeftBox = vec2(100, 100);
-  vec2 kBottomRightBox = vec2(600, 600);
+  size_t kDefaultRadius = 10;
+
+  size_t kTopWall = 100;
+  size_t kBottomWall = 600;
+
+  size_t kLeftWall = 100;
+  size_t kRightWall = 600;
+
+  vec2 kTopLeftBox = vec2(kLeftWall, kTopWall);
+  vec2 kBottomRightBox = vec2(kRightWall, kBottomWall);
 
 };
 

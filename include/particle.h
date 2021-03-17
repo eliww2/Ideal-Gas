@@ -20,6 +20,7 @@ class Particle {
   glm::vec2 GetPosition() const;
   glm::vec2 GetVelocity() const;
 
+
  private:
   glm::vec2 position_;
   glm::vec2 velocity_;
