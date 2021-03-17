@@ -15,6 +15,11 @@ namespace idealgas {
 class GasContainer {
  public:
 
+  /**
+   * Takes in the preferred number of particals and the max initial volocity.
+   * @param num_particles
+   * @param max_velocity
+   */
   GasContainer(size_t num_particles, size_t max_velocity);
 
   /**
@@ -22,6 +27,10 @@ class GasContainer {
    */
   void Display() const;
 
+  /**
+   * Adds a particle to a container.
+   * @param particle
+   */
   void AddParticle(Particle& particle);
 
   /**
@@ -30,6 +39,14 @@ class GasContainer {
    */
   void AdvanceOneFrame();
 
+  /**
+   * Updates the velocity of the particles when they collide with each other.
+   * @param pos_one
+   * @param pos_two
+   * @param vel_one
+   * @param vel_two
+   * @return
+   */
   glm::vec2 ParticleCollision(glm::vec2 pos_one, glm::vec2 pos_two, glm::vec2 vel_one,
                          glm::vec2 vel_two);
 

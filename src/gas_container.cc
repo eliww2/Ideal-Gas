@@ -43,7 +43,7 @@ void GasContainer::AdvanceOneFrame() {
 
     // check left wall collision
     if (position[0] < kTopLeftBox[0] + kDefaultRadius && velocity[0] < 0) {
-        particles_[i].SetVelocity(vec2(-velocity[0], velocity[1]));
+      particles_[i].SetVelocity(vec2(-velocity[0], velocity[1]));
     }
 
     // check right wall collision
@@ -61,22 +61,23 @@ void GasContainer::AdvanceOneFrame() {
       particles_[i].SetVelocity(vec2(velocity[0], -velocity[1]));
     }
 
-    for (size_t j = 0; j < particles_.size(); j++) {
+    if (particles_.size() > 1) {
+      for (size_t j = 0; j < particles_.size(); j++) {
+        if (i != j) {
+          if (std::abs(particles_[j].GetPosition()[0] - position[0]) < 20 &&
+              std::abs(particles_[j].GetPosition()[1] - position[1]) < 20 &&
+              glm::dot((position - particles_[j].GetPosition()),
+                       (velocity - particles_[j].GetVelocity())) < 0) {
+            glm::vec2 one_vel = velocity;
+            glm::vec2 two_vel = particles_[j].GetVelocity();
+            glm::vec2 one_pos = position;
+            glm::vec2 two_pos = particles_[j].GetPosition();
 
-      if (i != j) {
-        if (std::abs (particles_[j].GetPosition()[0] - position[0]) < 20
-            && std::abs (particles_[j].GetPosition()[1] - position[1]) < 20
-            && glm::dot((position - particles_[j].GetPosition()),
-                        (velocity - particles_[j].GetVelocity())) < 0) {
-          glm::vec2 one_vel = velocity;
-          glm::vec2 two_vel = particles_[j].GetVelocity();
-          glm::vec2 one_pos = position;
-          glm::vec2 two_pos = particles_[j].GetPosition();
-
-          particles_[i].SetVelocity(ParticleCollision(
-              one_pos, two_pos, one_vel, two_vel));
-          particles_[j].SetVelocity(ParticleCollision(
-              two_pos, one_pos, two_vel, one_vel));
+            particles_[i].SetVelocity(
+                ParticleCollision(one_pos, two_pos, one_vel, two_vel));
+            particles_[j].SetVelocity(
+                ParticleCollision(two_pos, one_pos, two_vel, one_vel));
+          }
         }
       }
     }
