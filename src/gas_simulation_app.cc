@@ -2,7 +2,7 @@
 
 namespace idealgas {
 
-IdealGasApp::IdealGasApp() : container_(20) {
+IdealGasApp::IdealGasApp() : container_(20, 3) {
   ci::app::setWindowSize(kWindowSize, kWindowSize);
 }
 

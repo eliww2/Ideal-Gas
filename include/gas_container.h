@@ -15,12 +15,14 @@ namespace idealgas {
 class GasContainer {
  public:
 
-  GasContainer(size_t num_particles);
+  GasContainer(size_t num_particles, size_t max_velocity);
 
   /**
    * Displays the container walls and the current positions of the particles.
    */
   void Display() const;
+
+  void AddParticle(Particle& particle);
 
   /**
    * Updates the positions and velocities of all particles (based on the rules
@@ -30,6 +32,7 @@ class GasContainer {
 
   glm::vec2 ParticleCollision(glm::vec2 pos_one, glm::vec2 pos_two, glm::vec2 vel_one,
                          glm::vec2 vel_two);
+
  private:
 
   std::vector<Particle> particles_;
