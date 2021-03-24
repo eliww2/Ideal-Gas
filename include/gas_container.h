@@ -28,12 +28,6 @@ class GasContainer {
   void Display() const;
 
   /**
-   * Adds a particle to a container.
-   * @param particle
-   */
-  void AddParticle(Particle& particle);
-
-  /**
    * Updates the positions and velocities of all particles (based on the rules
    * described in the assignment documentation).
    */
@@ -54,7 +48,15 @@ class GasContainer {
 
   std::vector<Particle> particles_;
 
-  size_t kDefaultRadius = 10;
+  //The mass for particles
+  size_t kSmallMass = 1;
+  size_t kMediumMass = 2;
+  size_t kLargeMass = 3;
+
+  //the radius for particles.
+  size_t kSmallRadius = 5;
+  size_t kMediumRadius = 10;
+  size_t kLargeRadius = 15;
 
   size_t kTopWall = 100;
   size_t kBottomWall = 600;
