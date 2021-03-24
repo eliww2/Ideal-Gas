@@ -2,14 +2,13 @@
 
 namespace idealgas {
 
-IdealGasApp::IdealGasApp() : container_(20, 3) {
+IdealGasApp::IdealGasApp() : container_(40, 3) {
   ci::app::setWindowSize(kWindowSize, kWindowSize);
 }
 
 void IdealGasApp::draw() {
   ci::Color background_color("black");
   ci::gl::clear(background_color);
-
   container_.Display();
 }
 

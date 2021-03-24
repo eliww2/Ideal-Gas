@@ -42,7 +42,11 @@ class GasContainer {
    * @return
    */
   glm::vec2 ParticleCollision(glm::vec2 pos_one, glm::vec2 pos_two, glm::vec2 vel_one,
-                         glm::vec2 vel_two);
+                         glm::vec2 vel_two, float mass_one, float mass_two);
+
+  void DrawHistogram(Particle particle, vec2 top_left, vec2 bottom_right, std::vector<float>& count) const;
+
+  void DrawConstants() const;
 
  private:
 
@@ -58,14 +62,23 @@ class GasContainer {
   size_t kMediumRadius = 10;
   size_t kLargeRadius = 15;
 
-  size_t kTopWall = 100;
-  size_t kBottomWall = 600;
+  size_t kTopWall = 50;
+  size_t kBottomWall = 500;
 
-  size_t kLeftWall = 100;
-  size_t kRightWall = 600;
+  size_t kLeftWall = 50;
+  size_t kRightWall = 500;
 
   vec2 kTopLeftBox = vec2(kLeftWall, kTopWall);
   vec2 kBottomRightBox = vec2(kRightWall, kBottomWall);
+
+  vec2 kTopLeftSmall = vec2(620, 20);
+  vec2 kBottomRightSmall = vec2(850, 250);
+
+  vec2 kTopLeftMed = vec2(620, 270);
+  vec2 kBottomRightMed = vec2(850, 500);
+
+  vec2 kTopLeftLarge = vec2(620, 520);
+  vec2 kBottomRightLarge = vec2(850, 750);
 
 };
 
