@@ -18,7 +18,7 @@ TEST_CASE("Wall collision test") {
     glm::vec2 expected(1, 0);
 
     vec2 velocity = vec2(x_velocity, y_velocity);
-    idealgas::Particle particle(position, velocity);
+    idealgas::Particle particle(position, velocity, 2, 10);
     idealgas::GasContainer container(0, 2);
 
     container.AddParticle(particle);
@@ -39,7 +39,7 @@ TEST_CASE("Wall collision test") {
     glm::vec2 expected(-1, 0);
 
     vec2 velocity = vec2(x_velocity, y_velocity);
-    idealgas::Particle particle(position, velocity);
+    idealgas::Particle particle(position, velocity, 2, 10);
     idealgas::GasContainer container(0, 2);
 
     container.AddParticle(particle);
@@ -60,7 +60,7 @@ TEST_CASE("Wall collision test") {
     glm::vec2 expected(0, -1);
 
     vec2 velocity = vec2(x_velocity, y_velocity);
-    idealgas::Particle particle(position, velocity);
+    idealgas::Particle particle(position, velocity, 2, 10);
     idealgas::GasContainer container(0, 2);
 
     container.AddParticle(particle);
@@ -81,7 +81,7 @@ TEST_CASE("Wall collision test") {
     glm::vec2 expected(0, 1);
 
     vec2 velocity = vec2(x_velocity, y_velocity);
-    idealgas::Particle particle(position, velocity);
+    idealgas::Particle particle(position, velocity, 2, 10);
     idealgas::GasContainer container(0, 2);
 
     container.AddParticle(particle);
@@ -104,7 +104,7 @@ TEST_CASE("Velocity Updates Position") {
       glm::vec2 expected(301, 300);
 
       vec2 velocity = vec2(x_velocity, y_velocity);
-      idealgas::Particle particle(position, velocity);
+      idealgas::Particle particle(position, velocity, 2, 10);
       idealgas::GasContainer container(0, 2);
 
       container.AddParticle(particle);
@@ -125,7 +125,7 @@ TEST_CASE("Velocity Updates Position") {
       glm::vec2 expected(300, 301);
 
       vec2 velocity = vec2(x_velocity, y_velocity);
-      idealgas::Particle particle(position, velocity);
+      idealgas::Particle particle(position, velocity, 2, 10);
       idealgas::GasContainer container(0, 2);
 
       container.AddParticle(particle);
@@ -142,8 +142,8 @@ TEST_CASE("Particle Collision") {
     vec2 positionTwo = vec2(305, 300);
     vec2 velocityOne = vec2(1, 0);
     vec2 velocityTwo = vec2(-1, 0);
-    idealgas::Particle particleOne(positionOne, velocityOne);
-    idealgas::Particle particleTwo(positionTwo, velocityTwo);
+    idealgas::Particle particleOne(positionOne, velocityOne, 2, 10);
+    idealgas::Particle particleTwo(positionTwo, velocityTwo, 2, 10);
     container.AddParticle(particleOne);
     container.AddParticle(particleTwo);
     container.AdvanceOneFrame();
@@ -157,8 +157,8 @@ TEST_CASE("Particle Collision") {
     vec2 positionTwo = vec2(300, 305);
     vec2 velocityOne = vec2(0, 1);
     vec2 velocityTwo = vec2(0, -1);
-    idealgas::Particle particleOne(positionOne, velocityOne);
-    idealgas::Particle particleTwo(positionTwo, velocityTwo);
+    idealgas::Particle particleOne(positionOne, velocityOne, 2, 10);
+    idealgas::Particle particleTwo(positionTwo, velocityTwo, 2, 10);
     container.AddParticle(particleOne);
     container.AddParticle(particleTwo);
     container.AdvanceOneFrame();
@@ -168,14 +168,14 @@ TEST_CASE("Particle Collision") {
 }
 
 TEST_CASE("Edge cases for particle") {
-  SECTION("Particles not touching") {
+  SECTION("Particles not touching/ different radii") {
     idealgas::GasContainer container(0,2);
     vec2 positionOne = vec2(300, 300);
     vec2 positionTwo = vec2(200, 200);
     vec2 velocityOne = vec2(0, 1);
     vec2 velocityTwo = vec2(0, 1);
-    idealgas::Particle particleOne(positionOne, velocityOne);
-    idealgas::Particle particleTwo(positionTwo, velocityTwo);
+    idealgas::Particle particleOne(positionOne, velocityOne, 2, 10);
+    idealgas::Particle particleTwo(positionTwo, velocityTwo, 2, 20);
     container.AddParticle(particleOne);
     container.AddParticle(particleTwo);
     container.AdvanceOneFrame();
@@ -188,15 +188,28 @@ TEST_CASE("Edge cases for particle") {
     vec2 positionTwo = vec2(301, 301);
     vec2 velocityOne = vec2(0, -1);
     vec2 velocityTwo = vec2(0, 1);
-    idealgas::Particle particleOne(positionOne, velocityOne);
-    idealgas::Particle particleTwo(positionTwo, velocityTwo);
+    idealgas::Particle particleOne(positionOne, velocityOne, 2, 10);
+    idealgas::Particle particleTwo(positionTwo, velocityTwo, 2, 10);
     container.AddParticle(particleOne);
     container.AddParticle(particleTwo);
     container.AdvanceOneFrame();
     REQUIRE(-1 == particleOne.GetVelocity()[1]);
     REQUIRE(1 == particleTwo.GetVelocity()[1]);
   }
+  SECTION("Histogram boundaries and frequency") {
 
+    idealgas::GasContainer container(0,2);
+    vec2 positionOne = vec2(300, 300);
+    vec2 positionTwo = vec2(301, 301);
+    vec2 velocityOne = vec2(0, -1);
+    vec2 velocityTwo = vec2(0, 1);
+    idealgas::Particle particleOne(positionOne, velocityOne, 2, 10);
+    idealgas::Particle particleTwo(positionTwo, velocityTwo, 2, 10);
+    container.AddParticle(particleOne);
+    container.AddParticle(particleTwo);
+    int histogram_speed_count = 0;
+    container.AdvanceOneFrame();
+    REQUIRE(2 = histogram_speed_count);
 }
 
 

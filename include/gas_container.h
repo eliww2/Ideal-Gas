@@ -44,8 +44,18 @@ class GasContainer {
   glm::vec2 ParticleCollision(glm::vec2 pos_one, glm::vec2 pos_two, glm::vec2 vel_one,
                          glm::vec2 vel_two, float mass_one, float mass_two);
 
+  /**
+   * Draws the Histogram bars
+   * @param particle
+   * @param top_left
+   * @param bottom_right
+   * @param count
+   */
   void DrawHistogram(Particle particle, vec2 top_left, vec2 bottom_right, std::vector<float>& count) const;
 
+  /**
+   * Draws the items always on the screen.
+   */
   void DrawConstants() const;
 
  private:

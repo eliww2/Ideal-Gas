@@ -147,22 +147,53 @@ void GasContainer::DrawHistogram(Particle particle, vec2 top_left, vec2 bottom_r
   size_t left_start = (bottom_right[0] - top_left[0]) / 5;
 
   if (final_velocity < 1) {
+    int counter = count.at(1);
+    if ((counter % 2) == 0) {
+      ci::gl::color(ci::Color("green"));
+    } else {
+      ci::gl::color(ci::Color("red"));
+    }
     part_top_left = vec2(top_left[0], (bottom_right[1] - (20 * count.at(1))));
     part_bottom_right = vec2(top_left[0] + (left_start), (bottom_right[1]) - ((20 * count.at(1)) + 20));
     count.at(1)++;
+
   } else if (final_velocity < 2) {
+    int counter = count.at(2);
+    if ((counter % 2) == 0) {
+      ci::gl::color(ci::Color("green"));
+    } else {
+      ci::gl::color(ci::Color("red"));
+    }
     part_top_left = vec2(top_left[0] + left_start, (bottom_right[1] - (20 * count.at(2))));
     part_bottom_right = vec2(top_left[0] + (left_start * 2), (bottom_right[1]) - ((20 * count.at(2)) + 20));
     count.at(2)++;
   } else if (final_velocity < 3) {
+    int counter = count.at(3);
+    if ((counter % 2) == 0) {
+      ci::gl::color(ci::Color("green"));
+    } else {
+      ci::gl::color(ci::Color("red"));
+    }
     part_top_left = vec2(top_left[0] + (left_start * 2), (bottom_right[1] - (20 * count.at(3))));
     part_bottom_right = vec2(top_left[0] + (left_start * 3), (bottom_right[1]) - ((20 * count.at(3)) + 20));
     count.at(3)++;
   } else if (final_velocity < 4) {
+    int counter = count.at(4);
+    if ((counter % 2) == 0) {
+      ci::gl::color(ci::Color("green"));
+    } else {
+      ci::gl::color(ci::Color("red"));
+    }
     part_top_left = vec2(top_left[0] + (left_start * 3), (bottom_right[1] - (20 * count.at(4))));
     part_bottom_right = vec2(top_left[0] + (left_start * 4), (bottom_right[1]) - ((20 * count.at(4)) + 20));
     count.at(4)++;
   } else {
+    int counter = count.at(5);
+    if ((counter % 2) == 0) {
+      ci::gl::color(ci::Color("green"));
+    } else {
+      ci::gl::color(ci::Color("red"));
+    }
     part_top_left = vec2(top_left[0] + (left_start * 4), (bottom_right[1] - (20 * count.at(5))));
     part_bottom_right = vec2(top_left[0] + (left_start * 5), (bottom_right[1]) - ((20 * count.at(5)) + 20));
     count.at(5)++;

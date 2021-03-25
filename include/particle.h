@@ -36,7 +36,6 @@ class Particle {
    * get position.
    * @return
    */
-
   glm::vec2 GetPosition() const;
 
   /**
@@ -45,8 +44,16 @@ class Particle {
    */
   glm::vec2 GetVelocity() const;
 
+  /**
+   * Get mass.
+   * @return
+   */
   size_t GetMass() const;
 
+  /**
+   * get radius.
+   * @return
+   */
   size_t GetRadius() const;
 
  private:
